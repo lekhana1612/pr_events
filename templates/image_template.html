@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wedding{
+            display: flex;
+            justify-content: space-evenly;
+            height: 280px;
+        }
+        .bday{
+            display: flex;
+            justify-content: space-evenly;
+            height: 250px;
+            font-size: medium;
+            color:black;
+         
+        }
+        .by{
+            display: flex;
+            justify-content: space-evenly;
+            height: 280px;
+        }
+        .ann{
+            display: flex;
+            justify-content: space-evenly;
+            height: 280px;
+        }
+        #bg{
+    background-repeat: no-repeat;
+
+    background-size: cover;
+    background-attachment: fixed;
+}   
+h1{
+height:50px;
+width:350px;
+background-color: rgb(51, 43, 84);
+font-family: cursive;
+color: rgb(255, 240, 144);
+
+}
+label{
+    font-size: larger;
+            color:rgb(252, 252, 252);
+            font-weight: bolder;
+}
+input[type="radio"]{
+    transform: scale(1.8);
+}
+button{
+    margin-top: 50px;
+    width: 30%;
+    background-color: #ffffff;
+    color: #080710;
+    padding: 15px 0;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.hidden{
+    display: none;
+}
+.textBox
+{
+    height:100px;
+    width:100px;
+     
+}
+
+
+select{
+    display: block;
+    height: 50px;
+    width: 70%;
+  
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+} 
+
+label{
+    display: block;
+    height: 50px;
+    width:300px;
+    font-size: 20px;
+    font-weight: 800;
+    color:rgb(255, 255, 255);
+}
+
+        </style>
+       <script>
+       function show() {
+    document.getElementById("textBox").style.display = "block";
+  }
+       </script>
+</head>
+<body id="bg"style="background-color:black;">
+    <h2 style="font-size: 40px;color:bisque;">SELECT YOUR DECORATION THEME</h2>
+   
+    <form method="post" action= "{% url 'select_option' %}" id="DecorationForm" name="DecorationForm" role="form" novalidate="novalidate" class="bv-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <label>Customer Id:</label>
+         <input type="text" name="customer_id" class="box" id="customer_id" required>
+<h1>  Birthday Party</h1>
+<div class="bday">
+    <label for="birthday-1">1.</label>
+    <input type="radio" id="birthday-1" name="option" value="birthday-1">
+    <img src="{% static 'img/bdy.jpg' %}">
+    <label for="birthday-2">2.</label>
+    <input type="radio" id="birthday-2" name="option" value="birthday-2">
+    <img src="{% static 'img/bdy2.jpg' %}">
+    <label for="birthday-3">3.</label>
+    <input type="radio" id="img3" name="option" value="img3">
+    <img src="{% static 'img/bdy3.jpg' %}">
+    </div>
+    <h1>Naming Ceremony</h1>
+    <div class="ann">
+        <label for="naming-1">1.</label>
+        <input type="radio" id="naming-1" name="option" value="naming-1">&nbsp;
+        <img src="{% static 'img/naming1.jpg' %}">
+        <label for="naming-2">2.</label>
+        <input type="radio" id="naming-2" name="option" value="naming-2">&nbsp;
+        <img src="{% static 'img/naming2.jpg' %}">
+        <label for="naming-3">3.</label>
+        <input type="radio" id="naming-3" name="option" value="naming-3">&nbsp;
+        <img src="{% static 'img/naming3.jpg' %}">
+        
+        </div>
+    <h1>Wedding decoration</h1>
+    <div class="wedding">
+    
+        <label for="wedding-1">1.</label>
+        <input type="radio" id="wedding-1" name="option" value="wedding-1">&nbsp;
+        <img src="{% static 'img/wedding1.jpg' %}">
+        <label for="wedding-2">2.</label>
+        <input type="radio" id="wedding-2" name="option" value="wedding-2">&nbsp;
+        <img src="{% static 'img/wedding2.jpg' %}">
+        <label for="wedding-3">3.</label>
+        <input type="radio" id="wedding-3" name="option" value="wedding-3">&nbsp;
+        <img src="{% static 'img/wedding3.jpg' %}">
+        
+</div>
+    
+    <h1>Baby Shower</h1>
+<div class="by">
+    <label for="babyshower-1">1.</label>
+        <input type="radio" id="babyshower-1" name="option" value="babyshower-1">&nbsp;
+        <img src="{% static 'img/baby.jpg' %}">
+        <label for="babyshower-2">2.</label>
+        <input type="radio" id="babyshower-2" name="option" value="babyshower-2">&nbsp;
+        <img src="{% static 'img/baby3.jpg' %}">
+        <label for="babyshower-3">3.</label>
+        <input type="radio" id="babyshower-3" name="option" value="babyshower-3">&nbsp;
+        <img src="{% static 'img/baby2.jpg' %}">
+        
+    </div>
+    <h1>Wedding Anniversary</h1>
+<div class="ann">
+    
+    <label for="anniversary-1">1.</label>
+    <input type="radio" id="anniversary-1" name="option" value="anniversary-1">&nbsp;
+    <img src="{% static 'img/ann1.jpg' %}">
+    <label for="anniversary-2">2.</label>
+    <input type="radio" id="anniversary-2" name="option" value="anniversary-2">&nbsp;
+    <img src="{% static 'img/anni1.jpg' %}">
+    <label for="anniversary-3">3.</label>
+    <input type="radio" id="anniversary-3" name="option" value="anniversary-3">&nbsp;
+    <img src="{% static 'img/anni3.jpg' %}">
+    
+    </div>
+    <h1>Parties</h1>
+<div class="ann">
+    
+    <label for="party-1">1.</label>
+        <input type="radio" id="party-1" name="option" value="party-1">&nbsp;
+        <img src="{% static 'img/party1.jpg' %}">
+        <label for="party-2">2.</label>
+        <input type="radio" id="party-2" name="option" value="party-2">&nbsp;
+        <img src="{% static 'img/party2.jpg' %}">
+        <label for="party-3">3.</label>
+        <input type="radio" id="party-3" name="option" value="party-3">&nbsp;
+        <img src="{% static 'img/party3.jpg' %}"><br>
+        </div>
+        
+            <br><br>
+            <div>
+        <label style="font-size: 30px;"> &nbsp;&nbsp;
+
+        <input type="radio" id="customize" name="option" value="customize" onclick="show()">&nbsp;&nbsp;&nbsp;I WANT TO CUSTOMIZE</label>
+    
+        
+    </div>
+    <div id="textBox" class="hidden">
+        <textarea name="customization" id="customization" cols="50" rows="10"
+        placeholder="Tell your design" required></textarea>
+</div>
+
+    <center><button type="submit">SUBMIT</button></center>
+</form>
+</body>
+</html>
+
+
+
+

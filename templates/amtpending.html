@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+    <style media="screen">
+        *:before,
+*:after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+        form {
+    font-family: 'Poppins',sans-serif;
+   
+    letter-spacing: 0.5px;
+    outline: none;
+    border: none;
+
+    height: 700px;
+    width: 600px;
+    background-color: rgba(255, 255, 255, 0.865));
+    position: absolute;
+    transform: translate(-45%,-45%);
+    top: 50%;
+    left: 50%;
+   
+    
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    padding: 50px 35px;
+    margin-top: 30px;
+    
+}
+    
+        
+      
+input{
+    display: block;
+    height: 50px;
+    width: 200px;
+    color: black;
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+} 
+select{
+    display: block;
+    height: 50px;
+    width: 70%;
+  
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+} 
+
+label{
+    display: block;
+    height: 50px;
+    width:300px;
+    font-size: 20px;
+    font-weight: 800;
+    color:rgb(33, 16, 44);
+}
+  
+   #bg{
+    background-repeat: no-repeat;
+
+    background-size: cover;
+    background-attachment: fixed;
+}
+table{
+    background-color: transparent;
+    border-color:transparent;
+}
+h1{
+    font-size:45px;
+    color:rgb(84, 21, 83);
+    text-align: center;
+    font-family: cursive;
+    
+}
+img{
+    height: 100px;
+    width: 100px;
+    align-items: center;
+}
+button1{
+	width:20%;
+	outline:none;
+	border:1px solid #fff;
+	padding:12px 20px;
+	margin-bottom:10px;
+	border-radius:20px;
+	background:rgb(0, 3, 4);
+    color:white;
+    font-size: 20px;
+	}
+	button1:hover{
+		background:rgba(230, 234, 236, 0.877);
+        color:white;
+		}
+        button{
+    margin-top: 10px;
+    width: 40%;
+    background-color:rgb(48, 12, 40);
+    color: #ffffff;
+    padding: 15px 0;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius:30%;
+    cursor: pointer;
+}   
+    </style>
+    <script>
+function calculate() {
+    var myBox1 = parseFloat(document.getElementById('quotation').value);
+    var myBox2 =  parseFloat(document.getElementById('advance').value);
+    var result = document.getElementById('balance');
+    var numb = myBox1 - myBox2;
+    numb = numb.toFixed(2);
+    result.value = numb;
+  }
+
+ 
+  </script>
+</head>
+<body id="bg"style="background-image:url('{%static 'img/eventvenue.jpg'%}');">
+    {{r}}
+   
+   <section>
+    
+    <form method="post" action= "{% url 'savedata' %}" id="contact" role="form" novalidate="novalidate" class="bv-form">
+        {% csrf_token %}
+        <h1>Pending Amount Payment</h1>
+    <table border="1" align="center" height="50%" width="50%">
+       
+        <tr>
+   <td><label>Name:</label></td>
+         <td><input type="text" name="customername" class="box" id="customername" required autofocus></td></tr>
+    
+   <tr>
+         <td><label>Email:</label></td>
+         <td><input type="email" name="email" class="box" id="email" required autofocus></td></tr>
+        </tr>
+       <tr>
+    <td><label>Quotation:</label></td>
+    <td><input type="text" name="quotation" placeholder="Rs." class="box" id="quotation" oninput="calculate()" required autofocus></td></tr>
+    <br>
+    <tr>
+    <td><label>Advance Paid:</label></td>
+    <td><input type="text" name="advance" placeholder="Rs." class="box" id="advance" oninput="calculate()" required autofocus></td></tr>
+    <br>
+    <tr>
+    <td><label>Remaining Amount:</label></td>
+    <td><input type="text" name="balance" placeholder="Rs." class="box" id="balance" readonly></td></tr>
+    <td>
+    <img src="{% static 'img/pay.jpg' %}">
+    <br>Scan here and make the payment
+</td>
+   
+</tr>
+
+
+   </table>
+   <center><button type="submit" value="list" onclick="notif()">SUBMIT</button></center>
+
+   </form> 
+</section>
+
+   <footer>
+    <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+    <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> 
+  
+   <center>
+    <a href="{% url 'logout' %}"><button1>LOG OUT</button1></a>
+  
+    </center>
+
+</footer>
+</body>
+</html>

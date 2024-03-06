@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment Form</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        padding: 20px;
+    }
+    .container {
+        max-width: 400px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .form-group {
+        margin-bottom: 20px;
+    }
+    label {
+        display: block;
+        font-weight: bold;
+    }
+    input[type="text"],
+    input[type="number"],
+    input[type="date"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+    input[type="submit"] {
+        width: 100%;
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+    #bg{
+    background-repeat: no-repeat;
+
+    background-size: cover;
+    background-attachment: fixed;
+}
+input{
+    display: block;
+    height: 50px;
+    width: 200px;
+    color: black;
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+} 
+select{
+    display: block;
+    height: 50px;
+    width: 70%;
+  
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+} 
+
+label{
+    display: block;
+    height: 50px;
+    width:300px;
+    font-size: 20px;
+    font-weight: 800;
+    color:rgb(33, 16, 44);
+}
+</style>
+</head>
+<script>
+    function calculate() {
+
+
+}
+</script>
+<body id="bg"style="background-image:url('{%static 'img/eventvenue.jpg'%}');">
+
+    <div class="container">
+        <h2>Payment Form</h2>
+        {{pay}}
+        <form method="post" action= "{% url 'savepayment' %}" id="payment" name="payment" role="form" novalidate="novalidate" class="bv-form">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="customer_id">Customer_id:</label>
+                <input type="text" id="customer_id" name="customer_id" required>
+                <label for="amount">Amount:</label>
+                <input type="number" id="amount" name="amount" onclick="display" required>
+            </div>
+            <div class="form-group">
+                <label for="paymentMethod">Payment Method:</label>
+                <select id="paymentMethod" name="paymentMethod" onchange="togglePaymentFields()">
+                    <option value="card">Credit/Debit Card</option>
+                    <option value="upi">UPI</option>
+                </select>
+            </div>
+            <div id="cardFields">
+                <div class="form-group">
+                    <label for="card_number">Card Number:</label>
+                    <input type="text" id="card_number" name="card_number">
+                </div>
+                <div class="form-group">
+                    <label for="expiration_date">Expiration Date:</label>
+                    <input type="date" id="expiration_date" name="expiration_date">
+                </div>
+                <div class="form-group">
+                    <label for="cvv">CVV:</label>
+                    <input type="text" id="cvv" name="cvv">
+                </div>
+            </div>
+            <div id="upiFields" style="display: none;">
+                
+                <div class="form-group">
+                    <label for="qr_code">Scan the QR Code And Pay<br>QR Code:</label>
+                    <img src="{% static 'img/pay.jpg' %}">
+                    <label for="utr">After Payment,Enter UTR Number</label>
+                    <input type="text" id="utr" name="utr">
+                </div>
+            </div>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    
+    <script>
+        function togglePaymentFields() {
+            var paymentMethod = document.getElementById("paymentMethod").value;
+            var cardFields = document.getElementById("cardFields");
+            var upiFields = document.getElementById("upiFields");
+    
+            if (paymentMethod === "card") {
+                cardFields.style.display = "block";
+                upiFields.style.display = "none";
+            } else if (paymentMethod === "upi") {
+                cardFields.style.display = "none";
+                upiFields.style.display = "block";
+            }
+        }
+        
+        const paymentTypeRadios = document.querySelectorAll('input[name="paymentType"]');
+        const cardDetails = document.getElementById('cardDetails');
+        const upiDetails = document.getElementById('upiDetails');
+        const qrCodeContainer = document.getElementById('qrCodeContainer');
+    
+        paymentTypeRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                if (radio.value === 'upi') {
+                    cardDetails.style.display = 'none';
+                    upiDetails.style.display = 'block';
+                    qrCodeContainer.style.display = 'block';
+                    // Generate and set UPI QR code URL dynamically
+                    const upiId = document.getElementById('upiId').value;
+                    const qrCode = document.getElementById('qrCode');
+                    qrCode.src = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(`upi:${upiId}`)}&size=100x100`;
+                } else {
+                    cardDetails.style.display = 'block';
+                    upiDetails.style.display = 'none';
+                    qrCodeContainer.style.display = 'none';
+                }
+            });
+        });
+        function display()
+        {
+            var amount =  parseFloat(document.getElementById('image_template.advance').value);
+        }
+    </script>
+    </script>
+    
+    </body>
+    </html>

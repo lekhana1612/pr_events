@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Page 2</title>
+</head>
+<body>
+    <h1>Retrieve Advance Amount</h1>
+    <div id="advanceAmountDisplay"></div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Function to extract parameter from URL
+            function getParameterByName(name, url) {
+                if (!url) url = window.location.href;
+                name = name.replace(/[\[\]]/g, "\\$&");
+                var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                    results = regex.exec(url);
+                if (!results) return null;
+                if (!results[2]) return '';
+                return decodeURIComponent(results[2].replace(/\+/g, " "));
+            }
+
+            // Get customer ID from URL parameter
+            var customerID = getParameterByName('customer_id');
+
+            // AJAX request to fetch advance amount
+            $.ajax({
+                url: '/remainingAmt/get_advance_amount/', // URL to your Django view to fetch advance amount
+                type: 'GET',
+                data: {
+                    'customer_id': customer_id
+                },
+                success: function(response) {
+                    var advance = response.advance_amount;
+                    // Display advance amount on the front end
+                    $('#advanceAmountDisplay').text("Advance Amount: " + advance);
+                },
+                error: function(xhr, errmsg, err) {
+                    console.log(xhr.status + ": " + xhr.responseText);
+                }
+            });
+        });
+    </script>
+    <body>
+        <h1>Search Customer</h1>
+        <form action="{% url 'process_advance_amount' %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <label for="customer_id">Customer ID:</label>
+            <input type="text" id="customer_id" name="customer_id" value="{{ customer_id }}">
+            <button type="submit">Search</button>
+        </form>
+   
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+    <style media="screen">
+        *:before,
+*:after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+        form {
+    font-family: 'Poppins',sans-serif;
+   
+    letter-spacing: 0.5px;
+    outline: none;
+    border: none;
+
+    height: 1100px;
+    width: 600px;
+    background-color: rgba(255, 255, 255, 0.865));
+    position: absolute;
+    transform: translate(-45%,-45%);
+    top: 50%;
+    left: 50%;
+   
+    
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    padding: 50px 35px;
+    margin-top: 30px;
+    
+}
+a{
+    text-decoration: none;
+}
+button1{
+	width:400px;
+	outline:none;
+	border:1px solid #fff;
+	padding:12px 20px;
+	margin-bottom:10px;
+	border-radius:20px;
+	background:rgb(0, 3, 4);
+    color:white;
+    font-size: 20px;
+	}
+	button1:hover{
+		background:rgba(230, 234, 236, 0.877);
+        color:white;
+		}
+        
+        button{
+    margin-top: 10px;
+    width: 100px;
+    background-color:rgb(52, 4, 42);
+    color: #ffffff;
+    padding: 15px 0;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius:30%;
+    cursor: pointer;
+}   
+input{
+    display: block;
+    height: 50px;
+    width: 200px;
+    color: black;
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 20px;
+    font-weight: 300;
+    
+} 
+select{
+    display: block;
+    height: 50px;
+    width: 70%;
+  
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 20px;
+    font-weight: 300;
+} 
+
+label{
+    display: block;
+    height: 50px;
+    width:300px;
+    font-size: 20px;
+    font-weight: 800;
+    color:rgb(33, 16, 44);
+}
+
+   #bg{
+    background-repeat: no-repeat;
+
+    background-size: cover;
+    background-attachment: fixed;
+}
+table{
+    background-color: transparent;
+    border-color:transparent;
+}
+th{
+    font-size:45px;
+    color:rgb(84, 21, 83);
+    text-align: center;
+    font-family: cursive;
+}
+img{
+    height: 100px;
+    width: 100px;
+    align-items: center;
+}
+textarea{
+    font-size: 20px;
+}
+    </style>
+    <script>
+function calculate() {
+    var myBox1 = parseFloat(document.getElementById('quotation').value);
+    var myBox2 =  parseFloat(document.getElementById('advance').value);
+    var result = document.getElementById('balance');
+    var numb = myBox1 - myBox2;
+    numb = numb.toFixed(2);
+    result.value = numb;
+  }
+  function notif(){
+    alert("Please check your mail for customer id along with your booking details")
+  }
+
+
+
+  </script>
+</head>
+<body id="bg"style="background-image:url('{%static 'img/eventvenue.jpg'%}');">
+    {{n}}
+   
+    <form method="post" action= "{% url 'saveenquiry'%}"id="customerdata" name="customerdata" role="form" novalidate="novalidate" class="bv-form">
+        {% csrf_token %}
+        <h1>Customer Details</h1>
+    <table border="2" align="center" height="50%" width="50%">
+        <th>CustomerDetails</th>
+        
+            
+        <tr>
+   <td><label>Name:</label></td>
+         <td><input type="text" name="customername" class="box" id="customername" required></td></tr>
+    
+    <td><label>Phone No:</label></td>
+    <td><input type="number" name="phone" class="box" id="phone" maxlength="10" required></td></tr>
+
+<td><label>Email:</label></td>
+<td><input type="email" name="email" class="box" id="email" required></td></tr>
+
+    <tr>
+    <td><label>Event Date:</label></td>
+    <td><input type="date" name="eventdate" class="box" id="eventdate" required></td></tr>
+    
+    <tr>
+    <td><label for="eventname">Event :</label></td>
+    <td><select name="eventname" id="eventname" class="box" required>
+        <option value="select">----select----</option>
+        <option value="Wedding">Wedding</option>
+        <option value="Birthday">Birthday Party</option>
+        <option value="Wedding Anniversary">Wedding Anniversary</option>
+        <option value="Bachelor Party">Bachelor Party</option>
+        <option value="Bachelorette Party">Bachelorette Party</option>
+        <option value=" OtherParty">Other Party</option>
+        <option value="Baby Shower">Baby Shower</option>
+        <option value="Naming Ceremony">Naming Ceremony</option>
+
+    </select></td></tr>
+   
+    <tr>
+    <td><label>Event Venue:</label></td>
+    <td><textarea name="eventvenue" id="eventvenue" cols="20" rows="4"
+                placeholder="your address" required></textarea></td></tr>
+   
+    <tr>
+    <td><label for="eventname">Event City</label></td>
+    <td><select name="eventcity" id="eventcity" class="box" required>
+        <option value="select">----select----</option>
+        <option value="Bangalore">Bangalore</option>
+        <option value="Tumkur">Tumkur</option>
+        <option value="Chikkaballapura">Chikkaballapura</option>
+        <option value="Mysore">Mysore</option>
+        <option value="Kanakpura">Kanakpura</option>
+        <option value="Ramanagar">Ramanagar</option>
+        <option value="Channapatna">Channapatna</option>
+        <option value="Magadi">Magadi</option>
+        
+        
+        </select></td></tr>
+       
+<td><label>Pincode:</label></td>
+<td><input type="pincode" name="pincode" class="box" id="pincode" required></td></tr> 
+       <tr>
+    <td><label>Quotation:</label></td>
+    <td><input type="text" name="quotation" placeholder="Rs." class="box" id="quotation" oninput="calculate()" required></td></tr>
+    <br>
+    <tr>
+    <td><label>Advance:</label></td>
+    <td><input type="text" name="advance" placeholder="Rs." class="box" id="advance" oninput="calculate()" required></td></tr>
+    <br>
+    <tr>
+    <td><label>Remaining Amount:</label></td>
+    <td><input type="text" name="balance" placeholder="Rs." class="box" id="balance" readonly></td></tr>
+    <tr>
+        <td><label>Give us a description regarding your event:</label></td>
+        <td><textarea name="description" id="description" cols="20" rows="5"
+                    placeholder="your ideas" required></textarea></td></tr><br><br>
+    <tr>
+   <td>
+    
+    <button type="reset">RESET</button>
+ <button type="submit" value="list" onclick="notif()">NEXT</button></a></td>
+</tr>
+
+   </table>
+   </form> 
+   
+
+</body>
+</html>

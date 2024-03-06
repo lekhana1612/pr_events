@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+    <style media="screen">
+              *,
+*:before,
+*:after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+.row{
+    height: 450px;
+    width: 400px;
+    background-color: rgba(255, 255, 255, 0.865));
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    padding: 50px 35px;
+}
+.row *{
+    font-family: 'Poppins',sans-serif;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    outline: none;
+    border: none;
+}
+form h3{
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 42px;
+    text-align: center;
+}
+        button{
+    margin-top: 60px;
+    width: 70%;
+    background-color:rgb(127, 43, 85);
+    color: #c3c1d4;
+    padding: 20px 0;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 50px;
+    
+    cursor: pointer;
+        }
+        body{
+            background-size: cover;
+        }
+        </style>
+        <script>
+
+
+        </script>
+    </head>
+    <body id="bg"style="background-image:url('{%static 'img/eventvenue.jpg'%}');">
+        <div class="row">
+        
+        <a href="{% url 'home' %}"><button type="submit" value="list" >BOOK A NEW EVENT</button></a><br>
+        <a href="{% url 'remainingAmt' %}"><button type="reset">AMOUNT PENDING CLIENT</button></a>
+        </div>
+    </body>
+    </html>
